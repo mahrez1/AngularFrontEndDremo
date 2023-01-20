@@ -6,9 +6,11 @@ export class Product {
         public unitPrice : number,
         public imageUrl : string,
         public active : boolean,
-        public unitsInStock : string,
+        public unitsInStock : number,
         public dateCreated : Date,
         public lastUpdated : Date
         )
     {}
 }
+//private totalPrice: any;
+//this.totalPrice = Big(number_value).toPrecision(2) --> (e.g. 15.00)
