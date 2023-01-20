@@ -1,5 +1,77 @@
-<p>sales-person-list works!</p>
-<table class="table">
+<div class="main-content">
+    <div class="section-content section-content-p30">
+        <div class="container-fluid">
+            <div class="row">
+<!-- loop over products -->
+                <div *ngFor="let tempProduct of products" class="col-md-3">
+                    <div class="product-box">
+                        <img src=" {{tempProduct.imageUrl}} " height="50" />
+                        <h1> {{tempProduct.sku}}</h1>
+                        <h1>{{tempProduct.name}} </h1>
+                        <h1>{{tempProduct.description}}</h1> 
+                        <div class="price">{{tempProduct.unitPrice | currency : 'USD'}} </div>
+                        <a href="#" class="primary-btn">Add to card</a>
+                        <h1>{{tempProduct.active}}  </h1>
+                        <h1>{{tempProduct.unitsInStock}}  </h1>
+                        <h1>{{tempProduct.dateCreated}}  </h1>
+                        <h1>{{tempProduct.lastUpdated}}  </h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--<table class="table">
     <thead class="table-dark">
         <tr>
             <th></th>
@@ -28,7 +100,7 @@
             <td class="align-middle"> {{tempProduct.lastUpdated}}  </td>
         </tr>
     </tbody>    
-</table>
+</table> -->
 
         
 
