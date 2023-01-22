@@ -7,16 +7,15 @@
 <!-- loop over products -->
                 <div *ngFor="let tempProduct of products" class="col-md-3">
                     <div class="product-box">
+                        <a routerLink="/products/{{tempProduct.id}} ">
                         <img src=" {{tempProduct.imageUrl}} " height="50" />
+                    </a>
                         <h1> {{tempProduct.sku}}</h1>
+                        <a routerLink="/products/{{tempProduct.id}} ">
                         <h1>{{tempProduct.name}} </h1>
-                        <h1>{{tempProduct.description}}</h1> 
+                        </a>
                         <div class="price">{{tempProduct.unitPrice | currency : 'USD'}} </div>
                         <a href="#" class="primary-btn">Add to card</a>
-                        <h1>{{tempProduct.active}}  </h1>
-                        <h1>{{tempProduct.unitsInStock}}  </h1>
-                        <h1>{{tempProduct.dateCreated}}  </h1>
-                        <h1>{{tempProduct.lastUpdated}}  </h1>
                     </div>
                 </div>
 

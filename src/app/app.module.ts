@@ -8,6 +8,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ProductService } from './services/product.service';
 import { ProductCaregoryMenuComponent } from './components/product-caregory-menu/product-caregory-menu.component';
 import { SearchComponent } from './components/search/search.component';
+import { DetailProductComponent } from './components/detail-product/detail-product.component';
 
 //import { RouterModule, Routes } from '@angular/router';
 //import {LOCALE_ID} from '@angular/core';
@@ -25,7 +26,8 @@ import { SearchComponent } from './components/search/search.component';
     AppComponent,
     ProductListComponent,
     ProductCaregoryMenuComponent,
-    SearchComponent
+    SearchComponent,
+    DetailProductComponent
   ],
   imports: [
     //RouterModule.forRoot(routes) ,
