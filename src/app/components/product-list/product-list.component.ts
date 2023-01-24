@@ -18,6 +18,8 @@ export class ProductListComponent implements OnInit {
   thePageSize : number = 5 ;
   theTotalElements : number = 0 ;
   previousCategoryId: number = 1;
+  previousKeyWord: string = "";
+
 
 
   constructor(private productService : ProductService , private route : ActivatedRoute) { }
@@ -43,8 +45,16 @@ export class ProductListComponent implements OnInit {
   handleSearchProducts() 
   {
     const theKeyword : string = this.route.snapshot.paramMap.get('keyword')! ;
-    this.productService.searchProducts(theKeyword).subscribe
-    (data => {this.products = data ;})
+   // this.productService.searchProducts(theKeyword).subscribe
+   // (data => {this.products = data ;})
+
+    if(this.previousKeyWord != theKeyword)
+    {
+      this.thePageNumber = 1 ;
+    }
+    this.previousKeyWord = theKeyword ;
+
+    this.productService.searchProductsPaginate(this.thePageNumber - 1,this.thePageSize ,theKeyword).subscribe(this.processResult())
   }
 
   handleListProducts()
@@ -70,13 +80,8 @@ export class ProductListComponent implements OnInit {
     this.previousCategoryId = this.currentCategryId ;
 
 
-    this.productService.getProductListPaginate(this.thePageNumber - 1,this.thePageSize ,this.currentCategryId).subscribe(
-      data => {this.products = data._embedded.products;
-      this.thePageNumber = data.page.number+ 1 ;
-      this.thePageSize = data.page.size ;
-      this.theTotalElements = data.page.totalElements ;
-      }
-    )
+    this.productService.getProductListPaginate(this.thePageNumber - 1,this.thePageSize ,this.currentCategryId).subscribe(this.processResult())
+   
   }
 
   updatePageSize(pageSize : string) 
@@ -85,5 +90,15 @@ export class ProductListComponent implements OnInit {
     this.thePageNumber= 1;
     this.listProducts() ;
   }
+
+  processResult() 
+  {
+   return (data : any)  => {this.products = data._embedded.products;
+      this.thePageNumber = data.page.number+ 1 ;
+      this.thePageSize = data.page.size ;
+      this.theTotalElements = data.page.totalElements ;
+  } ;
+  }
+
 
 }

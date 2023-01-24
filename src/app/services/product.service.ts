@@ -25,7 +25,7 @@ export class ProductService {
   getProductCategories() : Observable<ProductCategory[]> 
   {
     return this.HttpClient.get<GetResponseProductCategoty>(this.categoryUrl).pipe(map(response => response._embedded.productCategory)) ;  }
-  searchProducts(theKeyword: any) : Observable<Product[]> 
+  searchProducts(theKeyword: string) : Observable<Product[]> 
    {
     const searchUrl = `${this.basedUrl}/search/findByNameContaining?name=${theKeyword}`
     return this.getproducts(searchUrl) ;
@@ -46,6 +46,12 @@ export class ProductService {
     return this.HttpClient.get<GetResponseProducts>(searchUrl);
   }
 
+  searchProductsPaginate(thePage : number,thePageSize : number, theKeyword: string) : Observable<GetResponseProducts> 
+  {
+    const searchUrl = `${this.basedUrl}/search/findByNameContaining?name=${theKeyword}` + `&page=${thePage}&size=${thePageSize}`
+    return this.HttpClient.get<GetResponseProducts>(searchUrl);
+   }
+ 
 }
 
 interface GetResponseProducts 
