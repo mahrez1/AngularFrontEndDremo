@@ -9,6 +9,7 @@ import { ProductService } from './services/product.service';
 import { ProductCaregoryMenuComponent } from './components/product-caregory-menu/product-caregory-menu.component';
 import { SearchComponent } from './components/search/search.component';
 import { DetailProductComponent } from './components/detail-product/detail-product.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 //import { RouterModule, Routes } from '@angular/router';
 //import {LOCALE_ID} from '@angular/core';
@@ -33,7 +34,8 @@ import { DetailProductComponent } from './components/detail-product/detail-produ
     //RouterModule.forRoot(routes) ,
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    NgbModule
   ],
   providers: [ProductService], 
   bootstrap: [AppComponent]

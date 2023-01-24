@@ -14,6 +14,10 @@ export class ProductListComponent implements OnInit {
   currentCategryId : number =1 ;
   currentCategoryName: string = "";
   searchMode : boolean = false ;
+  thePageNumber : number = 1 ;
+  thePageSize : number = 10 ;
+  theTotalElements : number = 0 ;
+  previousCategoryId: number = 1;
 
 
   constructor(private productService : ProductService , private route : ActivatedRoute) { }
@@ -57,8 +61,22 @@ export class ProductListComponent implements OnInit {
       this.currentCategryId= 1 ;
       this.currentCategoryName= 'Books' ;
     }
-    this.productService.getProductList(this.currentCategryId).subscribe
-    (data => {this.products = data ;})
+
+    if(this.previousCategoryId != this.currentCategryId)
+    {
+      this.thePageNumber = 1 ;
+    }
+
+    this.previousCategoryId = this.currentCategryId ;
+
+
+    this.productService.getProductListPaginate(this.thePageNumber - 1,this.thePageSize ,this.currentCategryId).subscribe(
+      data => {this.products = data._embedded.products;
+      this.thePageNumber = data.page.number+ 1 ;
+      this.thePageSize = data.page.size ;
+      this.theTotalElements = data.page.totalElements ;
+      }
+    )
   }
 
 }
