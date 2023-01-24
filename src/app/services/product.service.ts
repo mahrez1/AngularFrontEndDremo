@@ -10,7 +10,7 @@ import { ProductCategory } from '../common/product-category';
 export class ProductService {
  
   
-
+//?&size=100
   private basedUrl = 'http://localhost:8080/api/products' ;
   private categoryUrl = 'http://localhost:8080/api/product-category' ;
 
