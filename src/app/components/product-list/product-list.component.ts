@@ -100,5 +100,11 @@ export class ProductListComponent implements OnInit {
   } ;
   }
 
+  addToCard(theProduct : Product)
+  {
+    console.log(`add to card : ${theProduct.name}`) ;
+    //to do
+  }
+
 
 }

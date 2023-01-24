@@ -10,6 +10,7 @@ import { ProductCaregoryMenuComponent } from './components/product-caregory-menu
 import { SearchComponent } from './components/search/search.component';
 import { DetailProductComponent } from './components/detail-product/detail-product.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { CartStatusComponent } from './components/cart-status/cart-status.component';
 
 //import { RouterModule, Routes } from '@angular/router';
 //import {LOCALE_ID} from '@angular/core';
@@ -28,7 +29,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     ProductListComponent,
     ProductCaregoryMenuComponent,
     SearchComponent,
-    DetailProductComponent
+    DetailProductComponent,
+    CartStatusComponent
   ],
   imports: [
     //RouterModule.forRoot(routes) ,
