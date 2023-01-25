@@ -28,7 +28,7 @@ totalQuantity : Subject<number> = new Subject<number>() ;
   alreadyExistsInCart = (existingCartItem!= undefined) ;
   if(alreadyExistsInCart)
   {
-    existingCartItem.quantity++ ;
+    existingCartItem.quantity!++ ;
   }
   else
   {
@@ -44,8 +44,8 @@ totalQuantity : Subject<number> = new Subject<number>() ;
     let totalQuantityValue :number = 0 ;
     for(let currentCartItem of this.cartItems)
     {
-      totalPriceValue += currentCartItem.quantity * currentCartItem.unitPrice;
-      totalQuantityValue += currentCartItem.quantity 
+      totalPriceValue += currentCartItem.quantity! * currentCartItem.unitPrice!;
+      totalQuantityValue += currentCartItem.quantity! ;
     }
     this.totalPrice.next(totalPriceValue) ;
     this.totalQuantity.next(totalQuantityValue) ;
