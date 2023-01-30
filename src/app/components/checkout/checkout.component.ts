@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, FormGroupName } from '@angular/forms';
+import { Country } from 'src/app/common/country';
+import { State } from 'src/app/common/state';
 import { CheckoutFormService } from 'src/app/services/checkout-form.service';
 
 @Component({
@@ -13,6 +15,10 @@ export class CheckoutComponent implements OnInit {
   totalQuantity : number = 0 ;
   creditCardYears :number[] = [] ;
   creditCardMonths :number[] = [] ;
+  countries : Country[] = [] ;
+  shippingAdressStates : State[] = [] ;
+  billingAdressStates : State[] = [] ;
+
 
 
   checkoutFormGroup! : FormGroup ;
@@ -84,8 +90,38 @@ export class CheckoutComponent implements OnInit {
       }
     )
 
+    this.CheckoutFormService.getCountries().subscribe
+    (
+      data =>
+      {
+        this.countries =data ;
+      }
+    )
+
+   
 
   }
+
+  getStates(formGroupName :string)
+  {
+    const formGroup = this.checkoutFormGroup.get(formGroupName) ;
+    const countryCode = formGroup?.value.country.code ;
+    this.CheckoutFormService.getStates(countryCode).subscribe
+    
+      (  data =>
+      {
+        if(formGroupName==='shippingAdress')
+        {
+          this.shippingAdressStates = data ;
+        }
+        else
+        {
+          this.billingAdressStates = data ;
+        }
+        formGroup!.get('state')!.setValue(data[0]) ;
+      }
+    )
+  } ;
 
   copyShippingToBilling(event : any)
   {
@@ -93,10 +129,12 @@ export class CheckoutComponent implements OnInit {
     {
       this.checkoutFormGroup.controls['billingAdress']
       .setValue(this.checkoutFormGroup.controls['shippingAdress'].value) ;
+      this.billingAdressStates= this.shippingAdressStates;
     }
     else
     {
       this.checkoutFormGroup.controls['billingAdress'].reset() ;
+      this.billingAdressStates= [] ;
     }
   }
 
@@ -133,6 +171,6 @@ export class CheckoutComponent implements OnInit {
       }
     )
 
-  }
+  } ;
 
 }

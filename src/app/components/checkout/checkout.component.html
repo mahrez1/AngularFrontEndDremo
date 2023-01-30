@@ -51,6 +51,40 @@
                     <div class="row">
                         <div class="col-md-2">
                             <label>
+                                Country
+                            </label>
+                        </div>
+                        <div class="col-md-9">
+                           <div class="input-space">
+                            <select formControlName="country" (change)="getStates('shippingAdress')">
+                                <option *ngFor="let country of countries" [ngValue]="country">
+                                    {{country.name}}
+                                </option>
+                            </select>
+                           </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-2">
+                            <label>
+                                State 
+                            </label>
+                        </div>
+                        <div class="col-md-9">
+                           <div class="input-space">
+
+                            <select formControlName="state">
+                                <option *ngFor="let state of shippingAdressStates" [ngValue]="state">
+                                    {{state.name}}
+                                </option>
+                            </select>
+
+                           </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-2">
+                            <label>
                                 Street 
                             </label>
                         </div>
@@ -74,40 +108,7 @@
                         </div>
                     </div>
 
-                    <div class="row">
-                        <div class="col-md-2">
-                            <label>
-                                State 
-                            </label>
-                        </div>
-                        <div class="col-md-9">
-                           <div class="input-space">
-
-                            <select formControlName="state">
-                                <option>
-                                    ----
-                                </option>
-                            </select>
-
-                           </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-2">
-                            <label>
-                                Country
-                            </label>
-                        </div>
-                        <div class="col-md-9">
-                           <div class="input-space">
-                            <select formControlName="country">
-                                <option>
-                                    ----
-                                </option>
-                            </select>
-                           </div>
-                        </div>
-                    </div>
+                  
                     <div class="row">
                         <div class="col-md-2">
                             <label>
@@ -126,13 +127,49 @@
                 <div class="input-space">
                     <label class="au-checkbox">
                         <input type="checkbox" (change)="copyShippingToBilling($event)">
-                        <span class="au-checkmark"></span>Billing adress is the same as shipping adress
+                        <span class="au-checkmark"></span>Press here if you want to copy Billing adress informations into shipping adress
                     </label>
                 </div>
 
                 <!--billing-->
                 <div formGroupName="billingAdress" class="form-area">
                     <h3>Billing Info</h3>
+                    <div class="row">
+                        <div class="col-md-2">
+                            <label>
+                                Country
+                            </label>
+                        </div>
+                        <div class="col-md-9">
+                           <div class="input-space">
+
+                            <select formControlName="country" (change)="getStates('billingAdress')">
+                                <option *ngFor="let country of countries" [ngValue]="country">
+                                    {{country.name}}
+                                </option>
+                            </select>
+
+                           </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-2">
+                            <label>
+                                State 
+                            </label>
+                        </div>
+                        <div class="col-md-9">
+                           <div class="input-space">
+
+                            <select formControlName="state">
+                                <option *ngFor="let state of billingAdressStates" [ngValue]="state">
+                                    {{state.name}}
+                                </option>
+                            </select>
+
+                           </div>
+                        </div>
+                    </div>
                     <div class="row">
                         <div class="col-md-2">
                             <label>
@@ -158,43 +195,7 @@
                            </div>
                         </div>
                     </div>
-
-                    <div class="row">
-                        <div class="col-md-2">
-                            <label>
-                                State 
-                            </label>
-                        </div>
-                        <div class="col-md-9">
-                           <div class="input-space">
-
-                            <select formControlName="state">
-                                <option>
-                                    ----
-                                </option>
-                            </select>
-
-                           </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-2">
-                            <label>
-                                Country
-                            </label>
-                        </div>
-                        <div class="col-md-9">
-                           <div class="input-space">
-
-                            <select formControlName="country">
-                                <option>
-                                    ----
-                                </option>
-                            </select>
-
-                           </div>
-                        </div>
-                    </div>
+                   
                     <div class="row">
                         <div class="col-md-2">
                             <label>
