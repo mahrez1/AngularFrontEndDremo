@@ -4,6 +4,7 @@ import { Country } from 'src/app/common/country';
 import { State } from 'src/app/common/state';
 import { CheckoutFormService } from 'src/app/services/checkout-form.service';
 import { spValidators } from 'src/app/common/validators';
+import { CartService } from 'src/app/services/cart.service';
 
 @Component({
   selector: 'app-checkout',
@@ -12,7 +13,7 @@ import { spValidators } from 'src/app/common/validators';
 })
 export class CheckoutComponent implements OnInit {
 
-  totalPrice : number =0 ;
+  totalPrice : number =0.00 ;
   totalQuantity : number = 0 ;
   creditCardYears :number[] = [] ;
   creditCardMonths :number[] = [] ;
@@ -24,9 +25,10 @@ export class CheckoutComponent implements OnInit {
 
   checkoutFormGroup! : FormGroup ;
 
-  constructor(private formBuilder : FormBuilder , private CheckoutFormService : CheckoutFormService) { }
+  constructor(private formBuilder : FormBuilder , private CheckoutFormService : CheckoutFormService ,private cartService : CartService) { }
 
   ngOnInit(): void {
+    this.updateCartStatus() ;
     this.checkoutFormGroup  =this.formBuilder.group
     (
       {
@@ -66,7 +68,7 @@ export class CheckoutComponent implements OnInit {
         ) ,
         creditCard : this.formBuilder.group
         (
-          {
+          { 
             cardType :new FormControl('',[Validators.required]) ,
             nameOnCard : new FormControl('',[Validators.required,Validators.minLength(2), spValidators.whiteSpace])  ,
             cardNumber :  new FormControl('',[Validators.required,
@@ -265,4 +267,11 @@ export class CheckoutComponent implements OnInit {
 
   } ;
 
+  updateCartStatus()
+  {
+    this.cartService.totalPrice.subscribe
+    (data => this.totalPrice = data) ;
+    this.cartService.totalQuantity.subscribe
+    (data => this.totalQuantity = data) ;
+  }
 }
