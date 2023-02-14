@@ -8,8 +8,8 @@ export class Purchase {
     
     
         public  customer : Customer | undefined ;
-        public shippingAdress : Address  | undefined ;
-        public billingAdress : Address | undefined ;
+        public shippingAddress : Address  | undefined ;
+        public billingAddress : Address | undefined ;
         public order : Order | undefined;
         public orderItems : OrderItem[] | undefined ;
         constructor () 

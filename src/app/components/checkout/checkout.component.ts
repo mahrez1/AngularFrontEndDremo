@@ -23,8 +23,8 @@ export class CheckoutComponent implements OnInit {
   creditCardYears :number[] = [] ;
   creditCardMonths :number[] = [] ;
   countries : Country[] = [] ;
-  shippingAdressStates : State[] = [] ;
-  billingAdressStates : State[] = [] ;
+  shippingAddressStates : State[] = [] ;
+  billingAddressStates : State[] = [] ;
 
 
 
@@ -49,7 +49,7 @@ export class CheckoutComponent implements OnInit {
             ]) , 
           }
         ) ,
-        shippingAdress : this.formBuilder.group
+        shippingAddress : this.formBuilder.group
         (
           {
             street : new FormControl('',[Validators.required,Validators.minLength(2), spValidators.whiteSpace]) ,
@@ -60,7 +60,7 @@ export class CheckoutComponent implements OnInit {
 
           }
         ) ,
-        billingAdress : this.formBuilder.group
+        billingAddress : this.formBuilder.group
         (
           {
             street : new FormControl('',[Validators.required,Validators.minLength(2), spValidators.whiteSpace]) ,
@@ -137,46 +137,46 @@ export class CheckoutComponent implements OnInit {
   //to do
   get shippingAddressStreet()
   {
-    return this.checkoutFormGroup.get('shippingAdress.street') ;
+    return this.checkoutFormGroup.get('shippingAddress.street') ;
   }
   get shippingAddressCity()
   {
-    return this.checkoutFormGroup.get('shippingAdress.city') ;
+    return this.checkoutFormGroup.get('shippingAddress.city') ;
   }
   get shippingAddressState()
   {
-    return this.checkoutFormGroup.get('shippingAdress.state') ;
+    return this.checkoutFormGroup.get('shippingAddress.state') ;
   }
   get shippingAddressCountry()
   {
-    return this.checkoutFormGroup.get('shippingAdress.country') ;
+    return this.checkoutFormGroup.get('shippingAddress.country') ;
   }
   get shippingAddressZipCode()
   {
-    return this.checkoutFormGroup.get('shippingAdress.zipCode') ;
+    return this.checkoutFormGroup.get('shippingAddress.zipCode') ;
   }
 
   ////// billing
 
-  get billingAdressStreet()
+  get billingAddressStreet()
   {
-    return this.checkoutFormGroup.get('billingAdress.street') ;
+    return this.checkoutFormGroup.get('billingAddress.street') ;
   }
-  get billingAdressCity()
+  get billingAddressCity()
   {
-    return this.checkoutFormGroup.get('billingAdress.city') ;
+    return this.checkoutFormGroup.get('billingAddress.city') ;
   }
-  get billingAdressState()
+  get billingAddressState()
   {
-    return this.checkoutFormGroup.get('billingAdress.state') ;
+    return this.checkoutFormGroup.get('billingAddress.state') ;
   }
-  get billingAdressCountry()
+  get billingAddressCountry()
   {
-    return this.checkoutFormGroup.get('billingAdress.country') ;
+    return this.checkoutFormGroup.get('billingAddress.country') ;
   }
-  get billingAdressZipCode()
+  get billingAddressZipCode()
   {
-    return this.checkoutFormGroup.get('billingAdress.zipCode') ;
+    return this.checkoutFormGroup.get('billingAddress.zipCode') ;
   }
   //credit card
   get creditCardType()
@@ -205,13 +205,13 @@ export class CheckoutComponent implements OnInit {
     
       (  data =>
       {
-        if(formGroupName==='shippingAdress')
+        if(formGroupName==='shippingAddress')
         {
-          this.shippingAdressStates = data ;
+          this.shippingAddressStates = data ;
         }
         else
         {
-          this.billingAdressStates = data ;
+          this.billingAddressStates = data ;
         }
         formGroup!.get('state')!.setValue(data[0]) ;
       }
@@ -222,14 +222,14 @@ export class CheckoutComponent implements OnInit {
   {
     if(event.target?.checked)
     {
-      this.checkoutFormGroup.controls['billingAdress']
-      .setValue(this.checkoutFormGroup.controls['shippingAdress'].value) ;
-      this.billingAdressStates= this.shippingAdressStates;
+      this.checkoutFormGroup.controls['billingAddress']
+      .setValue(this.checkoutFormGroup.controls['shippingAddress'].value) ;
+      this.billingAddressStates= this.shippingAddressStates;
     }
     else
     {
-      this.checkoutFormGroup.controls['billingAdress'].reset() ;
-      this.billingAdressStates= [] ;
+      this.checkoutFormGroup.controls['billingAddress'].reset() ;
+      this.billingAddressStates= [] ;
     }
   }
 
@@ -243,33 +243,33 @@ export class CheckoutComponent implements OnInit {
     {
       this.checkoutFormGroup.markAllAsTouched() ;
       return ;
-    }
+    } 
 
-    let order = new Order() ;
+    let order = new Order() ; 
     order.totalPrice = this.totalPrice ;
     order.totalQuantity = this.totalQuantity ;
     const cartItems = this.cartService.cartItems ;
     let orderItems : OrderItem[] = cartItems.map(tempCartItem =>new OrderItem(tempCartItem)) ;
     let purchase = new Purchase() ;
     purchase.customer = this.checkoutFormGroup.controls['customer'].value;
-    purchase.shippingAdress = this.checkoutFormGroup.controls['shippingAdress'].value ;
-    const shippingState : State = JSON.parse(JSON.stringify(purchase.shippingAdress?.state))
-    const shippingCountry : Country = JSON.parse(JSON.stringify(purchase.shippingAdress?.country))
-    purchase.shippingAdress!.state = shippingState.name ;
-    purchase.shippingAdress!.country = shippingCountry.name ;
+    purchase.shippingAddress = this.checkoutFormGroup.controls['shippingAddress'].value ;
+    const shippingState : State = JSON.parse(JSON.stringify(purchase.shippingAddress?.state))
+    const shippingCountry : Country = JSON.parse(JSON.stringify(purchase.shippingAddress?.country))
+    purchase.shippingAddress!.state = shippingState.name ;
+    purchase.shippingAddress!.country = shippingCountry.name ;
 
-    purchase.billingAdress = this.checkoutFormGroup.controls['billingAdress'].value ;
-    const billingState : State = JSON.parse(JSON.stringify(purchase.billingAdress?.state))
-    const billingCountry : Country = JSON.parse(JSON.stringify(purchase.billingAdress?.country))
-    purchase.shippingAdress!.state = billingState.name ;
-    purchase.shippingAdress!.country = billingCountry.name ;
+    purchase.billingAddress = this.checkoutFormGroup.controls['billingAddress'].value ;
+    const billingState : State = JSON.parse(JSON.stringify(purchase.billingAddress?.state))
+    const billingCountry : Country = JSON.parse(JSON.stringify(purchase.billingAddress?.country))
+    purchase.billingAddress!.state = billingState.name ;
+    purchase.billingAddress!.country = billingCountry.name ;
 
     purchase.order =order ;
     purchase.orderItems = orderItems ;
 
     this.checkoutService.placeOrder(purchase).subscribe
     (
-      {
+      { 
         next : response =>
         {
            alert(`Your order has been received.\nOrder tracking number: ${response.orderTrackingNumber}`) ;
