@@ -14,6 +14,7 @@ import { CartStatusComponent } from './components/cart-status/cart-status.compon
 import { CartDetailsComponent } from './components/cart-details/cart-details.component';
 import { CheckoutComponent } from './components/checkout/checkout.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { LoginComponent } from './components/login/login.component';
 
 //import { RouterModule, Routes } from '@angular/router';
 //import {LOCALE_ID} from '@angular/core';
@@ -35,7 +36,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     DetailProductComponent,
     CartStatusComponent,
     CartDetailsComponent,
-    CheckoutComponent
+    CheckoutComponent,
+    LoginComponent
   ],
   imports: [
     ReactiveFormsModule,
