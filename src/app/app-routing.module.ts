@@ -4,9 +4,17 @@ import { ProductListComponent } from './components/product-list/product-list.com
 import { DetailProductComponent } from './components/detail-product/detail-product.component';
 import { CartDetailsComponent } from './components/cart-details/cart-details.component';
 import { CheckoutComponent } from './components/checkout/checkout.component';
+import { OktaAuthModule, OKTA_CONFIG , OktaCallbackComponent } from '@okta/okta-angular';
+import {  OktaAuth } from '@okta/okta-auth-js';
+import myAppConfig from './config/my-app-config';
+import { LoginComponent } from './components/login/login.component';
+
+
 
 const routes: Routes = 
 [
+  {path : 'login/callback' , component : OktaCallbackComponent} ,
+  {path : 'login' , component : LoginComponent} ,
   {path : 'checkout' , component : CheckoutComponent} ,
   {path : 'cart-details' , component : CartDetailsComponent} ,
   {path : 'products/:id' , component : DetailProductComponent} ,
@@ -18,10 +26,12 @@ const routes: Routes =
   {path : '**' , redirectTo : '/products' ,pathMatch : 'full'} 
 ];
 
+
 @NgModule({
   
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule] ,
-  
+
+   
 })
 export class AppRoutingModule { }
